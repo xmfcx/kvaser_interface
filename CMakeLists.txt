@@ -51,10 +51,10 @@ target_link_libraries(
   kvaser_reader_node
   ${LIB_NAME}
 )
-rclcpp_components_register_nodes(
-  kvaser_reader_node
-  "kvaser_interface::KvaserReaderNode"
-)
+
+rclcpp_components_register_node(kvaser_reader_node
+  PLUGIN "kvaser_interface::KvaserReaderNode"
+  EXECUTABLE kvaser_reader_node_exe)
 
 # kvaser_writer ROS Node
 add_library(
@@ -77,9 +77,9 @@ target_link_libraries(
   kvaser_writer_node
   ${LIB_NAME}
 )
-rclcpp_components_register_nodes(
-  kvaser_writer_node
-  "kvaser_interface::KvaserWriterNode"
+rclcpp_components_register_node(kvaser_writer_node
+  PLUGIN "kvaser_interface::KvaserWriterNode"
+  EXECUTABLE kvaser_writer_node_exe
 )
 
 # CAN Bridge Node
@@ -121,7 +121,7 @@ target_link_libraries(
 )
 
 ament_export_include_directories(include)
-ament_export_interfaces(
+ament_export_targets(
   export_${LIB_NAME} HAS_LIBRARY_TARGET
   export_kvaser_reader_node HAS_LIBRARY_TARGET
   export_kvaser_writer_node HAS_LIBRARY_TARGET
